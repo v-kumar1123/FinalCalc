@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,27 +13,106 @@ public class FinalCalc extends JFrame {
     JLabel gradeWantedLabel=new JLabel("Final Weight: ");
     JTextField gradeWanted=new JTextField();
     JTextField term1=new JTextField();
-    JLabel term1Label=new JLabel("Term 1");
+    JLabel term1Label=new JLabel("Term 1:");
     JTextField term2=new JTextField();
-    JLabel term2Label=new JLabel("Term 2");
+    JLabel term2Label=new JLabel("Term 2:");
     JTextField term3=new JTextField();
-    JLabel term3Label=new JLabel("Term 3");
+    JLabel term3Label=new JLabel("Term 3:");
     JTextField term4=new JTextField();
-    JLabel term4Label=new JLabel("Term 4");
+    JLabel term4Label=new JLabel("Term 4:");
     JTextField term5=new JTextField();
-    JLabel term5Label=new JLabel("Term 5");
+    JLabel term5Label=new JLabel("Term 5:");
+    JButton calculate=new JButton("Calculate");
+    JButton clear=new JButton("Clear");
+    JLabel noOfTerms=new JLabel("Number of Terms:");
     Integer[] termNos={1,2,3,4,5};
     JComboBox termList;
+    Font font;
 
     public FinalCalc() {
         super("K0904676");
+        font = new Font("Monotype Corsiva", Font.BOLD,24);
         termList=new JComboBox(termNos);
         termList.setSelectedIndex(0);
         terms=new ArrayList<JTextField>(Arrays.asList(term1,term2,term3,term4,term5));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400,400);
+        setSize(400,600);
         setLayout(null);
+        setVisible(true);
 
+        totalWeightLabel.setFont(font);
+        totalWeightLabel.setBounds(0,20,200,40);
+        totalWeight.setBounds(200,20,150,40);
 
+        finalWeightLabel.setFont(font);
+        noOfTerms.setFont(font);
+        gradeWantedLabel.setFont(font);
+        finalWeightLabel.setBounds(0,70,200,40);
+        finalWeight.setBounds(200,70,150,40);
+        termList.setBounds(200, 120, 150,40);
+        noOfTerms.setBounds(0,120,200,40);
+        gradeWanted.setBounds(200, 170,150,40);
+        gradeWantedLabel.setBounds(0,170,150,40);
+        term1.setBounds(200,230,150,30);
+        term2.setBounds(200,270,150,30);
+        term3.setBounds(200,310,150,30);
+        term4.setBounds(200,350,150,30);
+        term5.setBounds(200,390,150,30);
+        term1Label.setFont(font);
+        term2Label.setFont(font);
+        term3Label.setFont(font);
+        term4Label.setFont(font);
+        term5Label.setFont(font);
+        term1Label.setBounds(125,225,200,40);
+        term2Label.setBounds(125,265,200,40);
+        term3Label.setBounds(125,305,200,40);
+        term4Label.setBounds(125,345,200,40);
+        term5Label.setBounds(125,385,200,40);
+        calculate.setFont(font);
+        clear.setFont(font);
+
+        calculate.setBounds(25,450,335,40);
+        clear.setBounds(25,500,335,40);
+
+        calculate.addActionListener(e -> process(e));
+        clear.addActionListener(e -> process(e));
+        termList.addActionListener(e -> process(e));
+
+        add(totalWeight);
+        add(totalWeightLabel);
+        add(finalWeight);
+        add(finalWeightLabel);
+        add(termList);
+        add(noOfTerms);
+        add(gradeWanted);
+        add(gradeWantedLabel);
+        add(term1);
+        add(term2);
+        add(term3);
+        add(term4);
+        add(term5);
+        add(term1Label);
+        add(term2Label);
+        add(term3Label);
+        add(term4Label);
+        add(term5Label);
+        add(calculate);
+        add(clear);
+
+    }
+
+    public void process(ActionEvent e) {
+        try {
+            for (int x = (Integer) termList.getSelectedItem()-1; x < 5; x++) {
+                terms.get(x).setEditable(false);
+            }
+            for (int x = (Integer) termList.getSelectedItem()-1; x >=0; x--) {
+                terms.get(x).setEditable(true);
+            }
+        }catch (Exception y) {y.printStackTrace();}
+
+        if(e.getActionCommand().equals("Calculate")) {
+
+        }
     }
 }
