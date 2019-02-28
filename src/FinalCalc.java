@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FinalCalc extends JFrame {
+    String acceptedChars="1 2 3 4 5 6 7 8 9 0";
+    public static final String ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    String[] accepChar=acceptedChars.split(" ");
     ArrayList<JTextField> terms;
     JLabel totalWeightLabel=new JLabel("Total Term Weight: ");
     JTextField totalWeight=new JTextField();
@@ -77,7 +80,14 @@ public class FinalCalc extends JFrame {
         calculate.addActionListener(e -> process(e));
         clear.addActionListener(e -> process(e));
         termList.addActionListener(e -> process(e));
-
+        term1.addActionListener(e -> process(e));
+        term2.addActionListener(e -> process(e));
+        term3.addActionListener(e -> process(e));
+        term4.addActionListener(e -> process(e));
+        term5.addActionListener(e -> process(e));
+        finalWeight.addActionListener(e -> textFilterer(e,finalWeight));
+        totalWeight.addActionListener(e -> textFilterer(e,totalWeight));
+        gradeWanted.addActionListener(e -> textFilterer(e,gradeWanted));
         add(totalWeight);
         add(totalWeightLabel);
         add(finalWeight);
@@ -102,8 +112,10 @@ public class FinalCalc extends JFrame {
     }
 
     public void process(ActionEvent e) {
+        boolean stringFound=false;
         try {
             for (int x = (Integer) termList.getSelectedItem()-1; x < 5; x++) {
+                terms.get(x).setText("");
                 terms.get(x).setEditable(false);
             }
             for (int x = (Integer) termList.getSelectedItem()-1; x >=0; x--) {
@@ -115,4 +127,18 @@ public class FinalCalc extends JFrame {
 
         }
     }
+    public Double textFilterer(String s) {
+        for(int x=0;x<ALPHA.length();x++) {
+            if(s.equals(ALPHA.charAt(x))) {
+                return null;
+            }
+        }
+        if(!(s==null)) {
+            if (!s.equals("")) {
+                return Double.parseDouble(s);
+            }
+        }
+        return null;
+    }
 }
+
